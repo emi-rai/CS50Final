@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>CS50 Final Project</title>
+        
+        <!-- BootStrap CSS and JS links-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        
+        <!-- CSS file link -->
+        <link type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"> 
+
+    </head>
+    
+    <body>
+
+        <nav class="navbar navbar-dark navbar-expand-md" style="background-color: #6a7b7c;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Hike NE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    {% if session["username"] %}
+                        <ul class="navbar-nav me-auto mt-2">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/loghike">Log A Hike</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/viewlog">View Log</a></li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/register">Register</a></li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item"><a class="nav-link active" href="/login">Log In</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <div id="background">
+            <img id="background" src="{{ url_for('static', filename='images/riverwhitemts.jpeg') }}" class="image-fluid"  alt="...">
+        </div>
+
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-warning d-flex align-items-center alert-dismissable fade show" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </header>
+        {% endif %}
+
+
+        <main class="container-fluid py-5 text-center">
+            {% block main %}{% endblock %}
+        </main>
+
+        
+    </body>
+
+</html>

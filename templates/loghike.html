@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log A Hike
+{% endblock %}
+
+{% block main %}
+    
+    <div class="w-25 shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.hike_title.label(class="form-label text-muted") }}
+        
+            {{ form.hike_title(class="form-control text-muted")}}
+            <br/>
+        
+            {{ form.hike_date.label(class="form-label text-muted") }}
+        
+            {{ form.hike_date(class="form-control text-muted")}}
+            
+            <br/>
+        
+            {{ form.content.label(class="form-label text-muted") }}
+        
+            {{ form.content(class="form-control text-muted")}}
+            
+            <br/>
+        
+            <br/>
+        
+            {{ form.submit(class="btn btn-secondary") }}
+        </form>
+    </div>
+
+
+{% endblock %}

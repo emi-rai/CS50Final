@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View Log
+{% endblock %}
+
+{% block main %}
+    
+    {% for log in log_list %}
+        <div class="card shadow p-3 mb-5 bg-body rounded">
+            <div class="card-header">
+                Logged: {{log.created}}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-muted">{{log.hike_title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{log.hike_date}}</h6>
+                <p class="card-text text-muted">{{log.content}}</p>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    <!-- </div> -->
+    {% endfor %}
+          
+          
+{% endblock %}

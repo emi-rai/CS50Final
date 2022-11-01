@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <div class="container rounded" id="quote">
+        <figure class="text-end">
+            <blockquote class="blockquote">
+            <p class="text-muted">Mountains are the cathedrals where I practice my religion.</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+            Anatoli Bourkeev
+            </figcaption>
+        </figure>
+    </div>
+
+    <br/>
+
+    <!-- <div class="container" id="carousel">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='images/riverwhitemts.jpeg') }}" class="d-block w-50" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/wintersunset.jpeg') }}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="..." class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div> -->
+
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <div class="card" style="width: 22rem;">
+                    <img src="{{ url_for('static', filename='images/riverwhitemts.jpeg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title text-muted"">New Hampshire</h5>
+                      <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="btn btn-secondary">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-4">
+                <div class="card" style="width: 22rem;">
+                    <img src="{{ url_for('static', filename='images/vermontmts.jpeg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title text-muted"">Vermont</h5>
+                      <p class="card-text text-muted"">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="btn btn-secondary">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-4">
+                <div class="card" style="width: 22rem;">
+                    <img src="{{ url_for('static', filename='images/mainemts.jpeg') }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title text-muted"">Maine</h5>
+                      <p class="card-text text-muted"">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="btn btn-secondary">Go somewhere</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+  
+
+{% endblock %}

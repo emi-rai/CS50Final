@@ -1,0 +1,26 @@
+body {
+    background-color: #f5f3f2;
+}
+
+#background {
+    background-image: url('image/riverwhitemts.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+}
+
+#quote {
+    background-color: #dce4d0;
+}
+
+#carousel {
+    height: 500px;
+    display: block;
+    margin: auto;
+}
+
+#carouselExampleControls {
+    display: block;
+    margin: auto;
+}

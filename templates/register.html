@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <div class="w-25 shadow p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.username.label(class="form-label") }}
+        
+            {{ form.username(class="form-control")}}
+            <br/>
+        
+            {{ form.password.label(class="form-label") }}
+        
+            {{ form.password(class="form-control")}}
+            
+            <br/>
+        
+            {{ form.confirmation.label(class="form-label") }}
+        
+            {{ form.confirmation(class="form-control")}}
+            
+            <br/>
+        
+            <br/>
+        
+            {{ form.register(class="btn btn-secondary") }}
+        </form>
+    </div>
+
+
+    <!-- <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Enter username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Type password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm password" type="password">
+        </div>
+        <button class="btn btn-secondary" type="submit">Register</button>
+    </form> -->
+{% endblock %}
