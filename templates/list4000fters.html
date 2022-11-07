@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    4000 Footers
+{% endblock %}
+
+{% block main %}
+    <div>
+        <table class="table">
+            <thead class="text-muted">
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">State/Rank</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Elevation</th>
+                    <th class="text-end"scopt="col">Completed</th>
+                </tr>
+            </thead>
+            <tbody class="text-muted">
+                
+
+                {% for mtn in mtn_list %}
+
+                    <tr>
+                        <th scope="row">{{ mtn['Rank'] }}</th>
+                        <td scope="row">{{ mtn['State/Rank'] }}</td>
+                        <td scope="row">{{ mtn['Name'] }}</td>
+                        <td scope="row">{{ mtn['Elevation'] }}</td>
+                        <td scope="row" class="text-end">{{ mtn['Completed']}}</td>
+                    </tr>  
+
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+        
+
+{% endblock %}

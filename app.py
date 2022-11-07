@@ -6,7 +6,6 @@ from flask import Flask, render_template, session, flash, request, redirect
 from flask_session import Session
 from flask_login import LoginManager, login_required, UserMixin, login_user
 from werkzeug.security import check_password_hash, generate_password_hash
-from dotenv import load_dotenv
 
 import os
 
@@ -121,7 +120,10 @@ def index():
 @login_required
 def home():
     if request.method == 'GET':
-        return render_template('home.html', username=request.args.get('username'))
+        username = session.get('username')
+        print(username)
+        print(session.get('userid'))
+        return render_template('home.html', username=username)
 
 
 @app.route("/logout")
@@ -171,7 +173,8 @@ def register():
                 # Login the user
                 login_user(user)
                 # Start session
-                session['username'] = user.id
+                session['userid'] = user.id
+                session['username'] = user.username
                 # Return the home page
                 return render_template('/home.html', username=form.username.data)
         
@@ -187,7 +190,7 @@ def login():
 
     form = LoginForm()
 
-    if request.method() == 'POST':
+    if request.method == 'POST':
         if form.validate_on_submit():
             # Check username on form is in the database
             conn = get_db_connection()
@@ -203,7 +206,7 @@ def login():
                 # If username and password match database, log the user in and initiate a session
                 if form.username.data == user.username and check_password_hash(user.user_password, form.password.data):
                     login_user(user)
-                    session['username'] = user.id
+                    session['userid'] = user.id
                     return redirect('/home?username=' + request.form.get('username'))
                 
                 # If the username or password are incorrect, flash a message and reload the login form
@@ -233,7 +236,7 @@ def loghike():
             # Connect to the database
             db = get_db_connection()
             # Insert info into database
-            db.execute('INSERT INTO hikelog (hike_title, hike_date, content, user_id) VALUES (?, ?, ?, ?)', (form.hike_title.data, form.hike_date.data, form.content.data, session.get('username')))
+            db.execute('INSERT INTO hikelog (hike_title, hike_date, content, user_id) VALUES (?, ?, ?, ?)', (form.hike_title.data, form.hike_date.data, form.content.data, session.get('userid')))
             db.commit()
             # Show user message
             flash('Hike Logged!')
@@ -248,8 +251,54 @@ def loghike():
 def viewlog():
     # Get all logged hikes from database
     db = get_db_connection()
-    log_obj = db.execute('SELECT hike_title, hike_date, content, created FROM hikelog WHERE user_id = ?', (session.get('username'),))
+    log_obj = db.execute('SELECT hike_title, hike_date, content, created FROM hikelog WHERE user_id = ?', (session.get('userid'),))
     log_list = sql_data_to_list_of_dicts(log_obj)
     print(log_list)
 
     return render_template('viewlog.html', log_list=log_list)
+
+
+@app.route('/list4000fters')
+@login_required
+def list4000fters():
+
+    # Pull mountain information from database
+    db = get_db_connection()
+    mnt_obj = db.execute('SELECT * FROM "4000_footers" ORDER BY Rank')
+    mtn_list = sql_data_to_list_of_dicts(mnt_obj)
+    log4000_obj = db.execute('SELECT * FROM log4000 WHERE user_id = ?', (session.get('userid'),))
+    list4000 = sql_data_to_list_of_dicts(log4000_obj)
+
+    # loop through the list4000
+    for fourk in list4000:
+        # loop through mtn_list
+        for mtn in mtn_list:
+            # if the fourk['rank_mtn'] is equal to the mtn['Rank']
+            if fourk['rank_mtn'] == mtn['Rank']:
+                mtn['Completed'] = fourk['date_hiked']
+
+    return render_template('list4000fters.html', mtn_list=mtn_list)
+
+@app.route('/log4000fter', methods=['GET', 'POST'])
+@login_required
+def log4000fter():
+    db = get_db_connection()
+    mnt_obj = db.execute('SELECT Name, "State/Rank" FROM "4000_footers" ORDER BY Rank')
+    mtn_list = sql_data_to_list_of_dicts(mnt_obj)
+
+    if request.method == 'POST':
+        mtn_state = request.form.get('4000Footer')
+        mtn_list = mtn_state.split(',')
+        mtn = mtn_list[0]
+        date_completed = str(request.form.get("hikedate"))
+        # Get rank of mountain with name from form
+        rank_mtn_obj = db.execute('SELECT Rank FROM "4000_footers" WHERE Name = ?', (mtn,))
+        rank_mtn_list = sql_data_to_list_of_dicts(rank_mtn_obj)
+        # Insert the information into the log4000 database
+        db.execute('INSERT INTO log4000 (user_id, name_mtn, rank_mtn, date_hiked) VALUES (?, ?, ?, ?)', (session.get('userid'), mtn, rank_mtn_list[0]['Rank'], date_completed))
+        db.commit()
+        flash('4000 Footer Logged!')
+        return render_template('log4000fter.html', mtn_list=mtn_list)
+
+    return render_template('log4000fter.html', mtn_list=mtn_list)
+

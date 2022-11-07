@@ -14,3 +14,12 @@ CREATE TABLE IF NOT EXISTS hikelog (
     content TEXT NOT NULL
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+CREATE TABLE IF NOT EXISTS log4000 (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    name_mtn TEXT NOT NULL,
+    rank_mtn INTEGER NOT NULL,
+    date_hiked TEXT NOT NULL, 
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)

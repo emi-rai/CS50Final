@@ -26,11 +26,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    {% if session["username"] %}
+                    {% if session["userid"] %}
                         <ul class="navbar-nav me-auto mt-2">
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/home">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/loghike">Log A Hike</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/loghike">Log Hike</a></li>
                             <li class="nav-item"><a class="nav-link" href="/viewlog">View Log</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/log4000fter">Log 4K</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/list4000fters">View 4Ks</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto mt-2">
                             <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
@@ -46,10 +48,6 @@
                 </div>
             </div>
         </nav>
-
-        <div id="background">
-            <img id="background" src="{{ url_for('static', filename='images/riverwhitemts.jpeg') }}" class="image-fluid"  alt="...">
-        </div>
 
         {% if get_flashed_messages() %}
             <header>

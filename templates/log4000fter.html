@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log 4000
+{% endblock %}
+
+{% block main %}
+    <form method="post">
+        <div class="mb-3">
+            <select class="form-control mx-auto w-auto text-muted" name="4000Footer">
+                <option disabled selected>4000 Footer</option>
+                {% for mtn in mtn_list %}
+                <option>{{ mtn['Name'] }}, {{mtn['State/Rank']}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <input type="date" class="form-control mx-auto w-auto text-muted" id="hikedate" name="hikedate" placeholder="Date of Hike">
+        </div>
+        <button class="btn btn-secondary" class="text-muted" type="submit">Log Hike</button>
+    </form>
+    <br/>
+{% endblock %}
