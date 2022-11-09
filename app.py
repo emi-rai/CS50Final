@@ -121,8 +121,6 @@ def index():
 def home():
     if request.method == 'GET':
         username = session.get('username')
-        print(username)
-        print(session.get('userid'))
         return render_template('home.html', username=username)
 
 
@@ -207,7 +205,8 @@ def login():
                 if form.username.data == user.username and check_password_hash(user.user_password, form.password.data):
                     login_user(user)
                     session['userid'] = user.id
-                    return redirect('/home?username=' + request.form.get('username'))
+                    session['username'] = user.username
+                    return redirect('/home')
                 
                 # If the username or password are incorrect, flash a message and reload the login form
                 elif not user.username:

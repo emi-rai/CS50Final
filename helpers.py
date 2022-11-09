@@ -1,7 +1,7 @@
 from functools import wraps
 from select import select
 from flask import g, request, redirect, url_for
-import sqlite3
+
 
 def login_required(f):
     @wraps(f)

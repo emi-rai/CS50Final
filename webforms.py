@@ -5,8 +5,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from wtforms.widgets import TextArea
-#from flask_ckeditor import CKEditorField
-import sqlite3
 
 
 class LoginForm(FlaskForm):
@@ -15,9 +13,9 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class RegisterForm(FlaskForm):
-    username = StringField('Enter username', validators=[DataRequired()])
-    password = PasswordField('Type password', validators=[DataRequired()])
-    confirmation = PasswordField('Confirm password', validators=[DataRequired()])
+    username = StringField('Enter Username', validators=[DataRequired()])
+    password = PasswordField('Enter Password', validators=[DataRequired()])
+    confirmation = PasswordField('Confirm Password', validators=[DataRequired()])
     register = SubmitField("Register")
 
 class HikeLog(FlaskForm):
