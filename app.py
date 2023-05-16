@@ -7,6 +7,7 @@ from flask_session import Session
 from flask_login import LoginManager, login_required, UserMixin, login_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
+
 import os
 
 from helpers import sql_data_to_list_of_dicts
